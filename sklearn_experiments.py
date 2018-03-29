@@ -94,8 +94,7 @@ kf = model_selection.KFold(n_splits=11)
 
 print("\nNeural Network")
 
-# neural_net = neural_network.MLPClassifier(hidden_layer_sizes=(128,), activation="relu", solver="sgd", learning_rate_init=0.01, max_iter=200)
-neural_net = neural_network.MLPClassifier(hidden_layer_sizes=(256,), learning_rate_init=0.001, max_iter=1000)
+neural_net = neural_network.MLPClassifier(hidden_layer_sizes=(128,128,128,), learning_rate_init=0.001, max_iter=1000)
 
 training_accuracies = []
 validation_accuracies = []
