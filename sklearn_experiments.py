@@ -97,6 +97,9 @@ print("\nNeural Network")
 # neural_net = neural_network.MLPClassifier(hidden_layer_sizes=(128,), activation="relu", solver="sgd", learning_rate_init=0.01, max_iter=200)
 neural_net = neural_network.MLPClassifier(hidden_layer_sizes=(256,), learning_rate_init=0.001, max_iter=1000)
 
+training_accuracies = []
+validation_accuracies = []
+
 for train_index, validation_index in kf.split(data):
     neural_net.fit(data[train_index], labels[:500])
 
@@ -106,6 +109,7 @@ for train_index, validation_index in kf.split(data):
     #     nn_train_predictions.append(neural_net.predict(image.reshape((1, image.size))).flatten()[0])
 
     accuracy, confusion_matrix = evaluate(nn_train_predictions, labels[:500].tolist())
+    training_accuracies.append(accuracy)
     print("Training accuracy:", accuracy)
     print("Confusion matrix:", confusion_matrix)
 
@@ -115,14 +119,21 @@ for train_index, validation_index in kf.split(data):
     #     nn_validation_predictions.append(neural_net.predict(instance.reshape((1, instance.size))).flatten()[0])
 
     accuracy, confusion_matrix = evaluate(nn_validation_predictions, labels[:50].tolist())
+    validation_accuracies.append(accuracy)
     print("Validation accuracy:", accuracy)
     print("Confusion matrix:", confusion_matrix)
+
+print("Average training accuracy:", sum(training_accuracies) / len(training_accuracies))
+print("Average validation accuracy:", sum(validation_accuracies) / len(validation_accuracies))
 
 
 
 # print("\nKNN")
 
 # knn = neighbors.KNeighborsClassifier(n_neighbors=3, p=1)
+
+# training_accuracies = []
+# validation_accuracies = []
 
 # for train_index, validation_index in kf.split(data):
 #     knn.fit(data[train_index], labels[:500])
@@ -133,6 +144,7 @@ for train_index, validation_index in kf.split(data):
 #     #     knn_train_predictions.append(knn.predict(image.reshape((1, image.size))).flatten()[0])
 
 #     accuracy, confusion_matrix = evaluate(knn_train_predictions, labels[:500].tolist())
+#     training_accuracies.append(accuracy)
 #     print("Training accuracy:", accuracy)
 #     print("Confusion matrix:", confusion_matrix)
 
@@ -142,9 +154,12 @@ for train_index, validation_index in kf.split(data):
 #     #     nn_validation_predictions.append(neural_net.predict(instance.reshape((1, instance.size))).flatten()[0])
 
 #     accuracy, confusion_matrix = evaluate(knn_validation_predictions, labels[:50].tolist())
+#     validation_accuracies.append(accuracy)
 #     print("Validation accuracy:", accuracy)
 #     print("Confusion matrix:", confusion_matrix)
 
+# print("Average training accuracy:", sum(training_accuracies) / len(training_accuracies))
+# print("Average validation accuracy:", sum(validation_accuracies) / len(validation_accuracies))
 
 
 
