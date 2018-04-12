@@ -36,6 +36,13 @@ for genre in genres:
         filename = "./" + genre + "/" + str(i) + ".png"
         images.append(load_image(filename)[np.newaxis, :, 5 * 128:6 * 128])
 
+labels = []
+
+directory = os.fsencode("./Country")
+for file in os.listdir(directory):
+    filename = os.fsdecode(file)
+    print(filename)
+
 
 classifier = Sequential()
 
@@ -56,7 +63,7 @@ fmod_struct.close()
 
 data = np.concatenate(images, axis = 0)[...,np.newaxis]
 print(data.shape)
-labels = to_categorical(np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]))
+labels = to_categorical(np.array(labels))
 training_accuracies = []
 validation_accuracies = []
 
