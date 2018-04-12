@@ -150,7 +150,7 @@ print("Average validation accuracy:", sum(validation_accuracies) / len(validatio
 #     knn_validation_predictions = knn.predict(data[validation_index])
 
 #     # for instance in validation_data:
-#     #     nn_validation_predictions.append(neural_net.predict(instance.reshape((1, instance.size))).flatten()[0])
+#     #     knn_validation_predictions.append(neural_net.predict(instance.reshape((1, instance.size))).flatten()[0])
 
 #     accuracy, confusion_matrix = evaluate(knn_validation_predictions, labels[:50].tolist())
 #     validation_accuracies.append(accuracy)
